@@ -27,13 +27,22 @@ function App() {
     }
   };
 
-  const getStepValue = (CurrentStep) => {
-    return stepsForm[CurrentStep]
+  const getStepValue = (step) => {
+    return stepsForm[step]
   };
 
-  const handleStepValue = (step, name, value) => { };
+  const handleStepValue = (step, name, value) => {
+    const updatedStepForms = [...stepsForm];
+    updatedStepForms[step][name] = value;
+    setStepsForm(updatedStepForms)
+  };
 
-  const registerInput = (name) => { };
+  const registerInput = (name) => {
+    return {
+      onchange: (e) => handleStepValue(step, name, e.target.value),
+      value: stepsForm[step][name] || '',
+    }
+  };
 
   const CurrentStep = steps[step];
   return (
