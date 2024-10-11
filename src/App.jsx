@@ -44,6 +44,22 @@ function App() {
     }
   };
 
+  const startTimer = () => {
+    handleStepValue(1, 'timer', 120);
+    useEffect(() => {
+      let timer;
+      if (stepsForm[i].timer !== null && stepsForm[1].timer > 0) {
+        timer = setInterval(() => {
+          handleStepValue(1, 'timer', stepsForm[1].timer - 1)
+        }, 1000)
+      } else if (stepsForm[i].timer === 0) {
+        handleStepValue(1, 'timer', null)
+      }
+      return () => clearInterval(timer);
+
+    }, [stepsForm[1].timer])
+  }
+
   const CurrentStep = steps[step];
   return (
     <TransportLayout>
